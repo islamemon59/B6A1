@@ -78,3 +78,30 @@ const printBookDetails = (books: Book) => {
   );
 };
 
+type Array1 = number[] | string[];
+type Array2 = number[] | string[];
+const getUniqueValues = (array1: Array1, array2: Array2): number[] => {
+  const newArray: number[] = [];
+  array1.map((arr1) => {
+    if (typeof arr1 === "string") {
+      if (!newArray.includes(Number(arr1))) {
+        newArray.push(Number(arr1));
+      }
+    } else if (!newArray.includes(arr1)) {
+      newArray.push(arr1);
+    }
+    array2.map((arr2) => {
+      if (typeof arr2 === "string") {
+        if (!newArray.includes(Number(arr2))) {
+          newArray.push(Number(arr2));
+        }
+      } else if (!newArray.includes(arr2)) {
+        newArray.push(arr2);
+      }
+    });
+  });
+
+  
+
+  return newArray.sort();
+};
