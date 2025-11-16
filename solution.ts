@@ -101,7 +101,31 @@ const getUniqueValues = (array1: Array1, array2: Array2): number[] => {
     });
   });
 
-  
-
   return newArray.sort();
+};
+
+type Items = {
+  name: string;
+  price: number;
+  quantity: number;
+  discount?: number;
+};
+const calculateTotalPrice = (products: Array<Items>): number => {
+  if (products.length === 0) {
+    return 0;
+  } else {
+    const allProductPrice = products.reduce(
+      (acc: number, item: Items): number => {
+        const { price, discount, quantity } = item;
+        if (discount) {
+          acc = acc + price * quantity - discount / 100;
+        } else {
+          acc = acc + price * quantity;
+        }
+        return Math.ceil(acc);
+      },
+      0
+    );
+    return allProductPrice;
+  }
 };
