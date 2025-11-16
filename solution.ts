@@ -47,3 +47,21 @@ const filterByRating = (sortRating: Array<Product>): Array<Product> => {
   return sortedArray;
 };
 
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  isActive: boolean;
+};
+const filterActiveUsers = (users: Array<User>): Array<User> => {
+  const activeUsers: Array<User> = [];
+  users.filter((user) => {
+    if (typeof user.isActive === "boolean" && user.isActive === true) {
+      activeUsers.push(user);
+    }
+  });
+
+  return activeUsers;
+};
+
+
