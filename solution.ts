@@ -22,5 +22,28 @@ const getLength = (checkLength: CheckLength): number => {
   }
 };
 
-console.log(getLength("typescript"));
-console.log(getLength([10, 20, 30, 40]));
+class Person {
+  name: string;
+  age: number;
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  getDetails(): string {
+    return `Name: ${this.name}, Age: ${this.age}`;
+  }
+}
+
+type Product = { title: string; rating: number };
+const filterByRating = (sortRating: Array<Product>): Array<Product> => {
+  const sortedArray: Array<Product> = [];
+  sortRating.map((item) => {
+    if (Math.floor(item.rating) >= 4) {
+      return sortedArray.push(item);
+    }
+  });
+
+  return sortedArray;
+};
+
