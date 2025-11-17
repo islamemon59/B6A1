@@ -1,5 +1,6 @@
-type CheckValue = string | number | boolean;
-const formatValue = (checkValue: CheckValue): CheckValue => {
+const formatValue = (
+  checkValue: string | number | boolean
+): string | number | boolean => {
   if (typeof checkValue === "string") {
     return checkValue.toUpperCase();
   } else if (typeof checkValue === "number") {
@@ -11,8 +12,7 @@ const formatValue = (checkValue: CheckValue): CheckValue => {
   }
 };
 
-type CheckLength = string | number[];
-const getLength = (checkLength: CheckLength): number => {
+const getLength = (checkLength: string | number[]): number => {
   if (typeof checkLength === "string") {
     const stringLength = checkLength.split("");
     return stringLength.length;
@@ -75,9 +75,10 @@ const printBookDetails = (books: Book) => {
   }, Available: ${books.isAvailable ? "Yes" : "No"}`;
 };
 
-type Array1 = number[] | string[];
-type Array2 = number[] | string[];
-const getUniqueValues = (array1: Array1, array2: Array2): number[] => {
+const getUniqueValues = (
+  array1: number[] | string[],
+  array2: number[] | string[]
+): number[] => {
   const newArray: number[] = [];
 
   for (let i = 0; i < array1.length; i++) {
