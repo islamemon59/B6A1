@@ -15,7 +15,6 @@ type CheckLength = string | number[];
 const getLength = (checkLength: CheckLength): number => {
   if (typeof checkLength === "string") {
     const stringLength = checkLength.split("");
-    console.log(stringLength);
     return stringLength.length;
   } else {
     return checkLength.length;
@@ -31,7 +30,7 @@ class Person {
   }
 
   getDetails(): string {
-    return `Name: ${this.name}, Age: ${this.age}`;
+    return `'Name: ${this.name}, Age: ${this.age}'`;
   }
 }
 
@@ -71,18 +70,18 @@ interface Book {
   isAvailable: boolean;
 }
 const printBookDetails = (books: Book) => {
-  console.log(
-    `Title: ${books.title}, Author: ${books.author}, Published: ${
-      books.publishedYear
-    }, Available: ${books.isAvailable ? "Yes" : "No"}`
-  );
+  return `Title: ${books.title}, Author: ${books.author}, Published: ${
+    books.publishedYear
+  }, Available: ${books.isAvailable ? "Yes" : "No"}`;
 };
 
 type Array1 = number[] | string[];
 type Array2 = number[] | string[];
 const getUniqueValues = (array1: Array1, array2: Array2): number[] => {
   const newArray: number[] = [];
-  array1.map((arr1) => {
+
+  for (let i = 0; i < array1.length; i++) {
+    let arr1 = array1[i];
     if (typeof arr1 === "string") {
       if (!newArray.includes(Number(arr1))) {
         newArray.push(Number(arr1));
@@ -90,7 +89,8 @@ const getUniqueValues = (array1: Array1, array2: Array2): number[] => {
     } else if (!newArray.includes(arr1)) {
       newArray.push(arr1);
     }
-    array2.map((arr2) => {
+    for (let i = 0; i < array2.length; i++) {
+      let arr2 = array2[i];
       if (typeof arr2 === "string") {
         if (!newArray.includes(Number(arr2))) {
           newArray.push(Number(arr2));
@@ -98,9 +98,8 @@ const getUniqueValues = (array1: Array1, array2: Array2): number[] => {
       } else if (!newArray.includes(arr2)) {
         newArray.push(arr2);
       }
-    });
-  });
-
+    }
+  }
   return newArray.sort();
 };
 
@@ -117,12 +116,13 @@ const calculateTotalPrice = (products: Array<Items>): number => {
     const allProductPrice = products.reduce(
       (acc: number, item: Items): number => {
         const { price, discount, quantity } = item;
-        if (discount) {
-          acc = acc + price * quantity - discount / 100;
-        } else {
+        if (!discount) {
           acc = acc + price * quantity;
+        } else {
+          const discountPrice = price * quantity * (discount / 100);
+          acc = acc + price * quantity - discountPrice;
         }
-        return Math.ceil(acc);
+        return acc;
       },
       0
     );
