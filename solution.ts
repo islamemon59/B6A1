@@ -120,10 +120,10 @@ const calculateTotalPrice = (products: Items[]): number => {
       (acc: number, item: Items): number => {
         const { price, discount, quantity } = item;
         if (!discount) {
-          acc = acc + price * quantity;
+          acc = acc + (price * quantity);
         } else {
-          const discountPrice = price * quantity * (discount / 100);
-          acc = acc + price * quantity - discountPrice;
+          const discountPrice = (price * quantity) * (discount / 100);
+          acc = acc + (price * quantity) - discountPrice;
         }
         return acc;
       },
