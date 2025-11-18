@@ -74,29 +74,40 @@ const getUniqueValues = (
   array2: number[] | string[]
 ): number[] => {
   const newArray: number[] = [];
+  let arrayIndex: number = 0;
+  let isExist: boolean = false;
 
   for (let i = 0; i < array1.length; i++) {
-    let arr1 = array1[i];
-    if (typeof arr1 === "string") {
-      if (!newArray.includes(Number(arr1))) {
-        newArray.push(Number(arr1));
+    for (let j = 0; j < newArray.length; j++) {
+      if (newArray[j] === array1[i]) {
+        isExist = true;
+        break;
       }
-    } else if (!newArray.includes(arr1)) {
-      newArray.push(arr1);
+    }
+
+    if (!isExist) {
+      newArray[arrayIndex] = Number(array1[i]);
+      arrayIndex++;
     }
     for (let i = 0; i < array2.length; i++) {
-      let arr2 = array2[i];
-      if (typeof arr2 === "string") {
-        if (!newArray.includes(Number(arr2))) {
-          newArray.push(Number(arr2));
+      for (let j = 0; j < newArray.length; j++) {
+        if (newArray[j] === array2[i]) {
+          isExist = true;
+          break;
         }
-      } else if (!newArray.includes(arr2)) {
-        newArray.push(arr2);
+      }
+
+      if (!isExist) {
+        newArray[arrayIndex] = Number(array2[i]);
+        arrayIndex++;
       }
     }
   }
   return newArray;
 };
+const array1 = ["1", "2", "3", "4", "5"];
+const array2 = [3, 4, 5, 6, 7];
+console.log(getUniqueValues(array1, array2));
 
 type Items = {
   name: string;
