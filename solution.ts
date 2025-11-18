@@ -35,13 +35,10 @@ class Person {
 }
 
 type Product = { title: string; rating: number };
-const filterByRating = (sortRating: Array<Product>): Array<Product> => {
-  const sortedArray: Array<Product> = [];
-  sortRating.map((item) => {
-    if (Math.floor(item.rating) >= 4) {
-      return sortedArray.push(item);
-    }
-  });
+const filterByRating = (sortRating: Product[]): Product[] => {
+  const sortedArray: Product[] = sortRating.filter(
+    (item) => Math.floor(item.rating) >= 4
+  );
 
   return sortedArray;
 };
@@ -52,13 +49,10 @@ type User = {
   email: string;
   isActive: boolean;
 };
-const filterActiveUsers = (users: Array<User>): Array<User> => {
-  const activeUsers: Array<User> = [];
-  users.filter((user) => {
-    if (typeof user.isActive === "boolean" && user.isActive === true) {
-      activeUsers.push(user);
-    }
-  });
+const filterActiveUsers = (users: User[]): User[] => {
+  const activeUsers: User[] = users.filter(
+    (user) => typeof user.isActive === "boolean" && user.isActive === true
+  );
 
   return activeUsers;
 };
@@ -101,7 +95,7 @@ const getUniqueValues = (
       }
     }
   }
-  return newArray.sort();
+  return newArray;
 };
 
 type Items = {
@@ -110,7 +104,7 @@ type Items = {
   quantity: number;
   discount?: number;
 };
-const calculateTotalPrice = (products: Array<Items>): number => {
+const calculateTotalPrice = (products: Items[]): number => {
   if (products.length === 0) {
     return 0;
   } else {
